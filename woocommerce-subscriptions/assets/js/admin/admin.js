@@ -19,6 +19,10 @@ jQuery(document).ready(function($){
 				$('.options_group.pricing ._regular_price_field').hide();
 				$('#sale-price-period').show();
 				$('.hide_if_subscription').hide();
+
+				if('day' == $('#_subscription_period').val()) {
+					$('.subscription_sync').hide();
+				}
 			} else {
 				$('.options_group.pricing ._regular_price_field').show();
 				$('#sale-price-period').hide();
@@ -286,6 +290,7 @@ jQuery(document).ready(function($){
 		$.moveSubscriptionVariationFields();
 		$.showHideVariableSubscriptionMeta();
 		$.showHideSyncOptions();
+		$.setSubscriptionLengths();
 	});
 
 	if($('.options_group.pricing').length > 0) {

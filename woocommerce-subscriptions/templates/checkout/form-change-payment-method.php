@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<table class="shop_table">
 		<thead>
 			<tr>
-				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce-subscriptions' ); ?></th>
-				<th class="product-quantity"><?php esc_html_e( 'Qty', 'woocommerce-subscriptions' ); ?></th>
-				<th class="product-total"><?php esc_html_e( 'Totals', 'woocommerce-subscriptions' ); ?></th>
+				<th class="product-name"><?php echo esc_html_x( 'Product', 'table headings in notification email', 'woocommerce-subscriptions' ); ?></th>
+				<th class="product-quantity"><?php echo esc_html_x( 'Quantity', 'table headings in notification email', 'woocommerce-subscriptions' ); ?></th>
+				<th class="product-total"><?php echo esc_html_x( 'Totals', 'table headings in notification email', 'woocommerce-subscriptions' ); ?></th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</table>
 
 	<div id="payment">
-		<?php $pay_order_button_text = apply_filters( 'woocommerce_change_payment_button_text', __( 'Change Payment Method', 'woocommerce-subscriptions' ) );
+		<?php $pay_order_button_text = apply_filters( 'woocommerce_change_payment_button_text', _x( 'Change Payment Method', 'text on button on checkout page', 'woocommerce-subscriptions' ) );
 
 		if ( $available_gateways = WC()->payment_gateways->get_available_payment_gateways() ) { ?>
 		<ul class="payment_methods methods">

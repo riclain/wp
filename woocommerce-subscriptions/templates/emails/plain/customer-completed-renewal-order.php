@@ -12,14 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 echo $email_heading . "\n\n";
 
-echo sprintf( __( 'Hi there. Your subscription renewal order with %s has been completed. Your order details are shown below for your reference:', 'woocommerce-subscriptions' ), get_option( 'blogname' ) ) . "\n\n";
+// translators: placeholder is the name of the site
+printf( __( 'Hi there. Your subscription renewal order with %s has been completed. Your order details are shown below for your reference:', 'woocommerce-subscriptions' ), get_option( 'blogname' ) ) . "\n\n";
 
 echo "****************************************************\n\n";
 
 do_action( 'woocommerce_email_before_order_table', $order, false, true );
 
-echo sprintf( __( 'Order number: %s', 'woocommerce-subscriptions' ), $order->get_order_number() ) . "\n";
-echo sprintf( __( 'Order date: %s', 'woocommerce-subscriptions' ), date_i18n( woocommerce_date_format(), strtotime( $order->order_date ) ) ) . "\n";
+printf( __( 'Order number: %s', 'woocommerce-subscriptions' ), $order->get_order_number() ) . "\n";
+printf( __( 'Order date: %s', 'woocommerce-subscriptions' ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ) . "\n";
 
 do_action( 'woocommerce_email_order_meta', $order, false, true );
 
@@ -47,11 +48,15 @@ do_action( 'woocommerce_email_after_order_table', $order, false, true );
 echo __( 'Your details', 'woocommerce-subscriptions' ) . "\n\n";
 
 if ( $order->billing_email ) {
-	echo __( 'Email:', 'woocommerce-subscriptions' ); echo $order->billing_email. "\n";
+	// translators: placeholder is customer's billing email
+	printf( __( 'Email: %s', 'woocommerce-subscriptions' ), $order->billing_email );
+	echo "\n";
 }
 
 if ( $order->billing_phone ) {
-	echo __( 'Tel:', 'woocommerce-subscriptions' ); ?> <?php echo $order->billing_phone. "\n";
+	// translators: placeholder is customer's billing phone number
+	printf( __( 'Tel: %s', 'woocommerce-subscriptions' ), $order->billing_phone );
+	echo "\n";
 }
 
 wc_get_template( 'emails/plain/email-addresses.php', array( 'order' => $order ) );
