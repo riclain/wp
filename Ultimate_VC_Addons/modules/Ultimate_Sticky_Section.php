@@ -28,6 +28,7 @@ if( !class_exists( 'Ultimate_Sticky_Section' ) ) {
 
 			$stick_behaviour = '';
 			$sticky_position = $sticky_position_lr = $permanent_lr = '';
+			$btn_mobile = '';
 
 			extract( shortcode_atts( array(
 				"el_class" => "",
@@ -42,6 +43,7 @@ if( !class_exists( 'Ultimate_Sticky_Section' ) ) {
 				"sticky_position_lr" => "left",
 				"permanent_lr" => "",
 				"btn_mobile" => "",
+				"btn_support" => "",
 
 			), $atts ) );
 
@@ -52,10 +54,17 @@ if( !class_exists( 'Ultimate_Sticky_Section' ) ) {
 			$stick_behaviour_data = "";
 			$left_right_postion = "";
 			$data_mobile = "";
+			$data_support = "";
 			if($btn_mobile == "enable"){
 				$data_mobile = " data-mobile='yes'";
 			}else{
 				$data_mobile = " data-mobile='no'";
+			}
+
+			if($btn_support == "enable"){
+				$data_support = " data-support='yes'";
+			}else{
+				$data_support = " data-support='no'";
 			}
 
 
@@ -163,6 +172,7 @@ if( !class_exists( 'Ultimate_Sticky_Section' ) ) {
 			$custom_data .= $sticky_custom_width ;
 			$custom_data .= $sticky_position != '' ? " data-sticky_position= '".$sticky_position."'": " data-sticky_position= 'top'" ;
 			$custom_data .= $data_mobile;
+			$custom_data .= $data_support;
 
 
 			$output = '<div class="ult_row_spacer">';
@@ -361,6 +371,23 @@ if( !class_exists( 'Ultimate_Sticky_Section' ) ) {
 							),
 
 							array(
+								"type" => "ult_switch",
+								"class" => "",
+								"heading" => __("Enable support", "ultimate_vc"),
+								"param_name" => "btn_support",
+								"value" => "",
+								"options" => array(
+										"enable" => array(
+											"label" => "",
+											"on" => "Yes",
+											"off" => "No",
+										)
+									),
+								"description" => __("Enable this incase Sticky Element not working.", "ultimate_vc"),
+								"dependency" => Array("element" => "stick_behaviour", "value" => array( 'stick_with_scroll' )),
+							),
+
+							array(
 								"type" => "textfield",
 								"heading" => __("Extra class name", "ultimate_vc"),
 								"param_name" => "el_class",
@@ -391,8 +418,8 @@ if( !class_exists( 'Ultimate_Sticky_Section' ) ) {
 				$ext = '.min';
 			}
 
-		  	wp_register_script( 'ult_sticky_js', plugins_url( $script_path.'jquery.sticky-kit.js',__FILE__ ) , array('jquery'), ULTIMATE_VERSION, true);
-		  	wp_register_script( 'ult_sticky_section_js', plugins_url( $js_path.'sticky-section'.$ext.'.js',__FILE__ ) , array('jquery'), ULTIMATE_VERSION, true);
+		  	wp_register_script( 'ult_sticky_js', plugins_url( $script_path.'fixto.js',__FILE__ ) , array('jquery'), ULTIMATE_VERSION, true);
+		  	wp_register_script( 'ult_sticky_section_js', plugins_url( $js_path.'sticky-section'.$ext.'.js',__FILE__ ) , array('ult_sticky_js'), ULTIMATE_VERSION, true);
 		  	wp_register_style( 'ult_sticky_section_css', plugins_url( $css_path.'sticky-section'.$ext.'.css',__FILE__ ), array(), ULTIMATE_VERSION);
 
 		}//ult_sticky_section_class

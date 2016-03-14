@@ -111,9 +111,10 @@ if(!class_exists("Ultimate_Buttons")){
 				$shadow_color = $btn_shadow_color;
 			else
 				$shadow_color = $btn_shadow_color_hover;
-
+			$alt = 'icon';
 			if($button_bg_img !== ''){
 				$img = apply_filters('ult_get_img_single', $button_bg_img, 'url');
+				$alt = apply_filters('ult_get_img_single', $button_bg_img, 'alt');
 			}
 			if($btn_link !== ''){
 				$href = vc_build_link($btn_link);
@@ -264,13 +265,13 @@ if(!class_exists("Ultimate_Buttons")){
 			}
 			if($img !== ''){
 				$output = '<div class="'.$wrapper_class.' '.$main_extra_class.'">'.$output.'</div>';
-			}else{				
+			}else{
 			$output = '<div class="'.$css_btn_design.' '.$wrapper_class.' '.$main_extra_class.'">'.$output.'</div>';
 			}
 
 			if($img !== ''){
 				$html = '<div class="ubtn-img-container '.$css_btn_design.'">';
-				$html .= '<img src="'.$img.'"/>';
+				$html .= '<img src="'.$img.'" alt="'.$alt.'"/>';
 				$html .= $output;
 				$html .= '</div>';
 				$output = $html;
@@ -283,7 +284,25 @@ if(!class_exists("Ultimate_Buttons")){
 					})
 				</script>';
 			}
+			$is_preset = false;
+			if(isset($_GET['preset'])) { //It will retrieve settings array
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>'; // remove backslash once copied
+			}
 			return $output;
+
 		}
 		function init_buttons(){
 			if(function_exists("vc_map"))

@@ -1,4 +1,78 @@
 jQuery(window).load(function(){
+
+    var responsive = function (){
+
+        /**
+         *  init variables
+         */
+         var    large_screen        = '',
+                desktop             = '',
+                tablet              = '',
+                tablet_portrait     = '',
+                mobile_landscape    = '',
+                mobile              = '';
+
+        /**
+         *  generate responsive @media css
+         *------------------------------------------------------------*/
+        jQuery(".ult-responsive").each(function(index, element) {
+
+            var t                       = jQuery(element),
+                n                       = t.attr('data-responsive-json-new'),
+                target                  = t.data('ultimate-target'),
+                temp_large_screen       = '',
+                temp_desktop            = '',
+                temp_tablet             = '',
+                temp_tablet_portrait    = '',
+                temp_mobile_landscape   = '',
+                temp_mobile             = '';
+
+            if( typeof n != "undefined" || n != null ) {
+                jQuery.each(jQuery.parseJSON(n), function (i, v) {
+                    // set css property
+                    var css_prop = i;
+                    if (typeof v != "undefined" && v != null) {
+                        var vals = v.split(";");
+                        jQuery.each(vals, function(i, vl) {
+                            if (typeof vl != "undefined" || vl != null) {
+                                var splitval = vl.split(":");
+                                switch(splitval[0]) {
+                                    case 'large_screen':    temp_large_screen       += css_prop+":"+splitval[1]+";"; break;
+                                    case 'desktop':         temp_desktop            += css_prop+":"+splitval[1]+";"; break;
+                                    case 'tablet':          temp_tablet             += css_prop+":"+splitval[1]+";"; break;
+                                    case 'tablet_portrait': temp_tablet_portrait    += css_prop+":"+splitval[1]+";"; break;
+                                    case 'mobile_landscape':temp_mobile_landscape   += css_prop+":"+splitval[1]+";"; break;
+                                    case 'mobile':          temp_mobile             += css_prop+":"+splitval[1]+";"; break;
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+
+            if(temp_mobile!='') {           mobile              += target+ '{'+temp_mobile+'}'; }
+            if(temp_mobile_landscape!='') { mobile_landscape    += target+ '{'+temp_mobile_landscape+'}'; }
+            if(temp_tablet_portrait!='') { tablet_portrait      += target+ '{'+temp_tablet_portrait+'}'; }
+            if(temp_tablet!='') {           tablet              += target+ '{'+temp_tablet+'}'; }
+            if(temp_desktop!='') {          desktop             += target+ '{'+temp_desktop+'}'; }
+            if(temp_large_screen!='') {     large_screen        += target+ '{'+temp_large_screen+'}'; }
+        });
+
+        /*
+         *      REMOVE Comments for TESTING
+         *-------------------------------------------*/
+        var UltimateMedia      = '<style>\n/** Ultimate: CountDown Responsive **/ ';
+         UltimateMedia   += desktop;
+         UltimateMedia   += "\n@media (min-width: 1824px) { "+ large_screen      +"\n}";
+         UltimateMedia   += "\n@media (max-width: 1199px) { "+ tablet            +"\n}";
+         UltimateMedia   += "\n@media (max-width: 991px)  { "+ tablet_portrait   +"\n}";
+         UltimateMedia   += "\n@media (max-width: 767px)  { "+ mobile_landscape  +"\n}";
+         UltimateMedia   += "\n@media (max-width: 479px)  { "+ mobile            +"\n}";
+         UltimateMedia   += '\n/** Ultimate: Tooltipster Responsive - **/</style>';
+         jQuery('head').append(UltimateMedia);
+
+    }
+    responsive();
     jQuery('.ult_countdown-dateAndTime').each(function(){
         var t = new Date(jQuery(this).html());
         var tz = jQuery(this).data('time-zone')*60;
@@ -10,80 +84,7 @@ jQuery(window).load(function(){
         var server_time = function(){
           return new Date(jQuery(this).data('time-now'));
         }
-
-        var responsive = function (){
-
-                /**
-                 *  init variables
-                 */
-                 var    large_screen        = '',
-                        desktop             = '',
-                        tablet              = '',
-                        tablet_portrait     = '',
-                        mobile_landscape    = '',
-                        mobile              = '';
-
-                /**
-                 *  generate responsive @media css
-                 *------------------------------------------------------------*/
-                jQuery(".ult-responsive").each(function(index, element) {
-
-                    var t                       = jQuery(element),
-                        n                       = t.attr('data-responsive-json-new'),
-                        target                  = t.data('ultimate-target'),
-                        temp_large_screen       = '',
-                        temp_desktop            = '',
-                        temp_tablet             = '',
-                        temp_tablet_portrait    = '',
-                        temp_mobile_landscape   = '',
-                        temp_mobile             = '';
-
-                    if( typeof n != "undefined" || n != null ) {
-                        jQuery.each(jQuery.parseJSON(n), function (i, v) {
-                            // set css property
-                            var css_prop = i;
-                            if (typeof v != "undefined" && v != null) {
-                                var vals = v.split(";");
-                                jQuery.each(vals, function(i, vl) {
-                                    if (typeof vl != "undefined" || vl != null) {
-                                        var splitval = vl.split(":");
-                                        switch(splitval[0]) {
-                                            case 'large_screen':    temp_large_screen       += css_prop+":"+splitval[1]+";"; break;
-                                            case 'desktop':         temp_desktop            += css_prop+":"+splitval[1]+";"; break;
-                                            case 'tablet':          temp_tablet             += css_prop+":"+splitval[1]+";"; break;
-                                            case 'tablet_portrait': temp_tablet_portrait    += css_prop+":"+splitval[1]+";"; break;
-                                            case 'mobile_landscape':temp_mobile_landscape   += css_prop+":"+splitval[1]+";"; break;
-                                            case 'mobile':          temp_mobile             += css_prop+":"+splitval[1]+";"; break;
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    }
-
-                    if(temp_mobile!='') {           mobile              += target+ '{'+temp_mobile+'}'; }
-                    if(temp_mobile_landscape!='') { mobile_landscape    += target+ '{'+temp_mobile_landscape+'}'; }
-                    if(temp_tablet_portrait!='') { tablet_portrait      += target+ '{'+temp_tablet_portrait+'}'; }
-                    if(temp_tablet!='') {           tablet              += target+ '{'+temp_tablet+'}'; }
-                    if(temp_desktop!='') {          desktop             += target+ '{'+temp_desktop+'}'; }
-                    if(temp_large_screen!='') {     large_screen        += target+ '{'+temp_large_screen+'}'; }
-                });
-
-            /*
-             *      REMOVE Comments for TESTING
-             *-------------------------------------------*/
-            var UltimateMedia      = '<style>\n/** Ultimate: CountDown Responsive **/ ';
-             UltimateMedia   += desktop;
-             UltimateMedia   += "\n@media (min-width: 1824px) { "+ large_screen      +"\n}";
-             UltimateMedia   += "\n@media (max-width: 1199px) { "+ tablet            +"\n}";
-             UltimateMedia   += "\n@media (max-width: 991px)  { "+ tablet_portrait   +"\n}";
-             UltimateMedia   += "\n@media (max-width: 767px)  { "+ mobile_landscape  +"\n}";
-             UltimateMedia   += "\n@media (max-width: 479px)  { "+ mobile            +"\n}";
-             UltimateMedia   += '\n/** Ultimate: Tooltipster Responsive - **/</style>';
-             jQuery('head').append(UltimateMedia);
-
-        }
-
+        
         var ticked = function (a){
             var json_responsive = jQuery('.ult_countdown-dateAndTime').attr('data-responsive-json-new');
             var target_responsive = jQuery('.ult_countdown-dateAndTime').attr('data-ultimate-target');
@@ -123,7 +124,6 @@ jQuery(window).load(function(){
                 jQuery(this).find('.ult_countdown-period').css('font-weight','bold');
                 jQuery(this).find('.ult_countdown-period').css('font-style','italic');
         }
-        responsive();
     }
 
     if(jQuery(this).hasClass('ult-usrtz')){

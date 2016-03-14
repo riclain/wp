@@ -23,7 +23,7 @@
 
 	1]  Create Data List -
 		$args = array(
-        	'target'      =>  '#id .ult-ih-heading',  // set targeted element e.g. unique class/id etc.
+        	'target'      =>  '#ID .TARGET_element_CLASS, #ID #TARGET_element_ID',  // set targeted element e.g. unique class/id etc.
            	'media_sizes' => array(
 				font-size' => $YOUR_PARAM_NAME_FONT_SIZE, 		//	Your PARAM_NAME which you set in array
 			   'line-height' => $YOUR_PARAM_NAME_LINE_HEIGHT 	//	Your PARAM_NAME which you set in array
@@ -31,8 +31,14 @@
        	);
 		$data_list = get_ultimate_vc_responsive_media_css($args);
 
-	2] Add class '.ult-responsive' and set data attribute - $data_list to targeted element
-		<div class='YOUR_PARAM_TARGET_ELEMENT ult-responsive' '.$data_list.'  >
+	2] Add ID and class 'ult-responsive' and set data attribute - $data_list to targeted element
+		<div id="#ID" class='ult-responsive' '.$data_list.' >
+			<div class="TARGET_element_ID">
+				...
+			</div>
+			<div class="TARGET_element_CLASS">
+				...
+			</div>
         	....
       	</div>
 

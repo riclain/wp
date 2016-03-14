@@ -670,6 +670,23 @@ if(!class_exists("Ultimate_Info_Table")){
 			//$design_cls = 'Info_'.ucfirst($design_style);
 			//$class = new $design_cls;
 			$output .= $design_func($atts,$content);
+			$is_preset = false; //Display settings for Preset
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
 			return $output;
 		}
 	} // class Ultimate_Info_Table

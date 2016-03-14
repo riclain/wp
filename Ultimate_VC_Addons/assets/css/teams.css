@@ -371,3 +371,11 @@
 .wpb_column>.wpb_wrapper .ult-team-member-wrap {
    margin-bottom: 35px;
 }
+
+.ult-team-member-wrap .ult-team-member-image a,
+.ult-team-member-wrap a {
+    border-radius: inherit;
+}
+.ult-style-2 .ult-team-member-description {
+    margin: 10px 0 10px;
+}

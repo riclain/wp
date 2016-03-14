@@ -32,6 +32,10 @@
     z-index: 10000;
     
 }
+
+.ult-sticky-anchor.ult_stick_to_row{
+    z-index: 10000;
+}
 /*.ult-sticky-section > .vc_row {
     margin-left: 0px;
     margin-right: 0px;

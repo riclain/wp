@@ -422,6 +422,7 @@ if(!class_exists('Ultimate_Interactive_Banner'))
 
 			//$img = wp_get_attachment_image_src( $banner_image, 'full');
 			$img = apply_filters('ult_get_img_single', $banner_image, 'url');
+			$alt = apply_filters('ult_get_img_single', $banner_image, 'alt');
 			if($banner_link !== ''){
 				$href = vc_build_link($banner_link);
 				$link = $href['url'];
@@ -525,7 +526,7 @@ if(!class_exists('Ultimate_Interactive_Banner'))
 
 			$output .= '<div class="ult-new-ib ult-ib-effect-'.$banner_style.' '.$el_class.' '.$min_height_class.' '.$css_ib2_styles.'" '.$responsive.' style="'.$banner_style_inline.'" data-opacity="'.$image_opacity.'" data-hover-opacity="'.$image_opacity_on_hover.'" '.$banner_min_height.'>';
 			if($img !== '')
-				$output .= '<img class="ult-new-ib-img" style="'.$img_style.'" alt="'.$banner_title.'" src="'.$img.'" '.$img_min_height.' '.$img_max_height.' />';
+				$output .= '<img class="ult-new-ib-img" style="'.$img_style.'" alt="'.$alt.'" src="'.$img.'" '.$img_min_height.' '.$img_max_height.' />';
 			$output .= '<div id="'.$interactive_banner_id.'" class="ult-new-ib-desc" style="'.$title_bg.'">';
 			$output .= '<'.$heading_tag.' class="ult-new-ib-title ult-responsive" '.$interactive_banner_data_list.' style="'.$banner_title_style_inline.'">'.$banner_title.'</'.$heading_tag.'>';
 			$output .= '<div class="ult-new-ib-content ult-responsive" '.$interactive_banner_desc_data_list.' style="'.$banner_desc_style_inline.'"><p>'.$banner_desc.'</p></div>';
@@ -534,6 +535,23 @@ if(!class_exists('Ultimate_Interactive_Banner'))
 				$target = 'target="'.$target.'"';
 			$output .= '<a class="ult-new-ib-link" '.$href.' '.$target.'></a>';
 			$output .= '</div>';
+			$is_preset = false; //Display settings for Preset
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
 			return $output;
 		}
 	}

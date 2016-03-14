@@ -657,9 +657,10 @@ if(!class_exists("Ultimate_Headings")){
 				$spacer_inline = '';
 				//$icon_inline = wp_get_attachment_image( $spacer_img, $siwidth, false, array("class"=>"ultimate-headings-icon-image") );
 				$icon_inline = apply_filters('ult_get_img_single', $spacer_img, 'url');
+				$alt = apply_filters('ult_get_img_single', $spacer_img, 'alt');
 				if($spacer_img_width !== '')
 					$spacer_inline = 'width:'.$spacer_img_width.'px';
-				$icon_inline = '<img src="'.$icon_inline.'" class="ultimate-headings-icon-image" style="'.$spacer_inline.'"/>';
+				$icon_inline = '<img src="'.$icon_inline.'" class="ultimate-headings-icon-image" alt="'.$alt.'" style="'.$spacer_inline.'"/>';
 			}
 			//if spacer type is line with icon or only icon show icon or image respectively
 			if($spacer == 'line_with_icon' || $spacer == 'icon_only')
@@ -721,6 +722,24 @@ if(!class_exists("Ultimate_Headings")){
 				if($spacer_position == 'bottom')
 					$output .= $this->ultimate_heading_spacer($wrapper_class, $wrapper_style, $icon_inline);
 			$output .= '</div>';
+
+				$is_preset = false; //Display settings for Preset
+				if(isset($_GET['preset'])) {
+					$is_preset = true;
+				}
+				if($is_preset) {
+					$text = 'array ( ';
+					foreach ($atts as $key => $att) {
+						$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+					}
+					if($content != '') {
+						$text .= '<br/>	\'content\' => \''.$content.'\',';
+					}
+					$text .= '<br/>)';
+					$output .= '<pre>';
+					$output .= $text;
+					$output .= '</pre>';
+				}
 			return $output;
 		}
 		function ultimate_heading_spacer($wrapper_class, $wrapper_style, $icon_inline)

@@ -276,6 +276,23 @@ if(!class_exists('AIO_Icons_Box'))
 			} else {
 				$output = $prefix.$html.$suffix;
 			}
+			$is_preset = false; //Display settings for Preset
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
 			return $output;
 		}
 		/* Add icon box Component*/

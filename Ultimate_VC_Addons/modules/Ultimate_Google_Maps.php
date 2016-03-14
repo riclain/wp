@@ -307,7 +307,7 @@ if(!class_exists("Ultimate_Google_Maps")){
 						              	"Bottom" => "",
 						              	"Left" => "",
 						            ),
-						            'group' => __( 'Styling', 'ultimate_vc' ),		 
+						            'group' => __( 'Styling', 'ultimate_vc' ),
 									"description" => __("Add spacing from outside to the map.", "ultimate_vc"),
 						        ),
 							array(
@@ -322,9 +322,9 @@ if(!class_exists("Ultimate_Google_Maps")){
 						              	"Bottom" => "",
 						              	"Left" => "",
 						            ),
-						            'group' => __( 'Styling', 'ultimate_vc' ),		 
+						            'group' => __( 'Styling', 'ultimate_vc' ),
 									"description" => __("Add spacing from outside to the map.", "ultimate_vc"),
-						        ),						  	
+						        ),
 					)
 				));
 			}
@@ -540,6 +540,23 @@ if(!class_exists("Ultimate_Google_Maps")){
 			}
 			})(jQuery);
 			</script>";
+			$is_preset = false; //Retrieve preset Code
+				if(isset($_GET['preset'])) {
+					$is_preset = true;
+				}
+				if($is_preset) {
+					$text = 'array ( ';
+					foreach ($atts as $key => $att) {
+						$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+					}
+					if($content != '') {
+						$text .= '<br/>	\'content\' => \''.$content.'\',';
+					}
+					$text .= '<br/>)';
+					$output .= '<pre>';
+					$output .= $text;
+					$output .= '</pre>'; // remove backslash once copied
+				}
 			return $output;
 		}
 	}

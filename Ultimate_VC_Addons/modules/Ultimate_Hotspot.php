@@ -68,6 +68,7 @@ if(!class_exists('ULT_HotSpot')) {
 			$content = wpb_js_remove_wpautop($content, true); // fix unclosed/unwanted paragraph tags in $content
 
 			$mnimg = apply_filters('ult_get_img_single', $main_img, 'url');
+			$alt = apply_filters('ult_get_img_single', $main_img, 'alt');
 			$cust_size = '';
 			if( $main_img_size== 'main_img_custom'){
 				if($main_img_width!='') {
@@ -75,7 +76,7 @@ if(!class_exists('ULT_HotSpot')) {
 				}
 			}
 			$output  = "<div class='ult_hotspot_container ".$is_vc_49_plus." ult-hotspot-tooltip-wrapper ".$el_class."' style=".$cust_size.">";
-			$output .= "  <img class='ult_hotspot_image' src=".$mnimg." />";
+			$output .= "  <img class='ult_hotspot_image' src=".$mnimg." alt='".$alt."'/>";
 			$output .= "     <div class='utl-hotspot-items ult-hotspot-item'>".do_shortcode($content)."</div>";
 			$output .= "     <div style='color:#000;' data-image='".$GLOBALS['hotspot_icon']." ".$GLOBALS['hotspot_icon_bg_color']." ".$GLOBALS['hotspot_icon_color']." ".$GLOBALS['hotspot_icon_size']." ".$GLOBALS['tooltip_continuous_animation']."'></div>";
 			$output .= "</div>";
@@ -260,11 +261,11 @@ if(!class_exists('ULT_HotSpot')) {
   			$output .= "  <div style='z-index: 39;position: relative;'>";
 
 			if($link_style == 'link'){
-	 			$output .= "   <a data-link_style='simple' class='ult-tooltip ult-tooltipstered ult-hotspot-tooltip' href='".$url."' ".$link_title." ".$target." data-status='hide'>";
+	 			$output .= "   <a data-link_style='simple' class='ult-tooltipstered ult-hotspot-tooltip' href='".$url."' ".$link_title." ".$target." data-status='hide'>";
 				$output .= $icon_inline;
 				$output .= "  </a>";
 			} else {
-				$output .= "   <a data-link_style='tootip' ".$data." class='ult-tooltip ult-tooltipstered ult-hotspot-tooltip' href='#' data-status='show'>";
+				$output .= "   <a data-link_style='tootip' ".$data." class='ult-tooltipstered ult-hotspot-tooltip' href='#' data-status='show'>";
 					$output .= $icon_inline;
 					$output .= "<span class='hotspot-tooltip-content'>".esc_html( str_replace('"', '\'', $hotspot_content ) )."</span>";
 				$output .= "  </a>";

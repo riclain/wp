@@ -42,12 +42,12 @@ jQuery(document).ready(function(){
     jQuery(".ult-style-3").hover(function(){
         var self = jQuery(this).find(' .ult-team-member-image').first();
         var hover_opacity = self.data('hover_opacity');
-        self.children('img').css( "opacity", hover_opacity );
+        self.find('img').css( "opacity", hover_opacity );
 
     }, function(){
 
         var self = jQuery(this).find(' .ult-team-member-image').first();
-        self.children('img').css( "opacity", 1 );
+        self.find('img').css( "opacity", 1 );
         
     });
 

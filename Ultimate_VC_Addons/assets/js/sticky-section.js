@@ -4,24 +4,25 @@ jQuery(document).ready(function($){
 var _window = $(window);
 var _windowsize = _window.width();
 var resize_flag = -1;
+var top_for_row = 0;
 
-inside_row();
+inside_row_();
 sticky_relocate();
   
 _window.resize(function() {
   resize_flag = 0;
   _windowsize = _window.width();
     sticky_relocate();
-    inside_row();
+    //inside_row_();
 });
 
 _window.bind('scroll', function() {
     sticky_relocate();
 });
 
-/***** inside row ******/
-function inside_row () {
-    var row_elements = $('div.ult-sticky-anchor');
+function inside_row_(){
+
+  var row_elements = $('div.ult-sticky-anchor');
 
     row_elements.each(function(){
 
@@ -30,10 +31,17 @@ function inside_row () {
       var ult_row_spacer = $this.closest('.ult_row_spacer');
       var ult_sticky = $this.find('.ult-sticky');
       var stick_behaviour = ult_sticky.data('stick_behaviour');
-      if ( stick_behaviour != 'stick_with_scroll_row' ){
+      var support = ult_sticky.data('support');
+
+      if ( stick_behaviour != 'stick_with_scroll_row' && support == 'no' ){
         return;
       }
 
+      /*var fullwidth_row = false; //for Browser full width row
+      
+      if ( $this.parents('.upb-background-text').length ){ // has parent
+        fullwidth_row = true;
+      }*/
       var global_height = 0; //for resize
       var gutter = ult_sticky.data('gutter');
       
@@ -43,7 +51,65 @@ function inside_row () {
       //if ( stick_behaviour == 'stick_with_scroll_row' ) {
 
         gutter = ult_explode_offset( global_height, gutter, gutter_class, gutter_id );
-        var parent = $this.closest('.vc_row');
+        var parent = $this.closest(".wpb_column").closest('.vc_row');//parent();//$this.closest('.vc_row');
+
+        var self_offset = $this.parent().offset().top;
+        //alert(parent_offset);
+        $this.addClass("ult_stick_to_row");
+        
+        parent.addClass("ult_s_container");
+        //alert(parent);
+        //alert(mobile);
+        if (support == 'yes') {
+          parent = 'body';
+        }
+        if( _windowsize < 768 && mobile == 'no'){
+          return;
+        }else{
+            $this.fixTo(parent, {
+            //className : 'is-stuck',
+            //zIndex: 10,
+            top: gutter,
+            useNativeSticky: false
+          });
+
+       }
+        
+    });
+
+}
+
+/***** inside row ******/
+/*function inside_row () {
+    var row_elements = $('div.ult-sticky-anchor');
+
+    row_elements.each(function(){
+
+
+      var $this = $(this);
+      var ult_row_spacer = $this.closest('.ult_row_spacer');
+      var ult_sticky = $this.find('.ult-sticky');
+      var stick_behaviour = ult_sticky.data('stick_behaviour');
+
+      if ( stick_behaviour != 'stick_with_scroll_row' ){
+        return;
+      }
+
+      var fullwidth_row = false; //for Browser full width row
+      
+      if ( $this.parents('.upb-background-text').length ){ // has parent
+        fullwidth_row = true;
+      }
+      var global_height = 0; //for resize
+      var gutter = ult_sticky.data('gutter');
+      
+      var gutter_class = ult_sticky.data('sticky_gutter_class');
+      var gutter_id = ult_sticky.data('sticky_gutter_id');
+      var mobile = ult_sticky.data('mobile');
+      //if ( stick_behaviour == 'stick_with_scroll_row' ) {
+
+        gutter = ult_explode_offset( global_height, gutter, gutter_class, gutter_id );
+        var parent = $this.closest(".wpb_column").parent();//$this.closest('.vc_row');
 
         var self_offset = $this.parent().offset().top;
         //alert(parent_offset);
@@ -61,21 +127,35 @@ function inside_row () {
           $this.stick_in_parent({parent:".ult_s_container", offset_top:gutter, spacer: ult_row_spacer})
             .on("sticky_kit:stick", function(e) {
               //console.log("has stuck!", e.target);
-              $(e.target).closest(".vc_row").css("display", "flex")
+              //console.log( $(e.target).closest(".wpb_column").parent().css("display", "flex") );
+              $(e.target).css("top", "0");
+              //console.log($(e.target).offset().top);
+              $(e.target).closest(".wpb_column").parent().css("display", "flex");
             })
             .on("sticky_kit:unstick", function(e) {
               //console.log("has unstuck!", e.target);
-              $(e.target).closest(".vc_row").css("display", "")
+              //$(e.target).closest(".vc_row").css("display", "")
+
+              $(e.target).closest(".wpb_column").parent().css("display", "")
             })
             .on("sticky_kit:bottom", function(e) {
               //console.log("has stuck!", e.target);
+              $(e.target).addClass("is_bottom");
+              $(e.target).css("bottom","");
+              // var s = $(window).scrollTop();
+              // var y = $(e.target).parent().offset().top;
+              // var z = s-y+50;
+              $(e.target).css('top', top_for_row + 'px');
+
             })
             .on("sticky_kit:unbottom", function(e) {
               //console.log("has unstuck!", e.target);
+              $(e.target).removeClass("is_bottom");
+
             });
        }
     });
-}
+}*/
 
 /****** inside row end *******/
  
@@ -89,6 +169,12 @@ function inside_row () {
 
       var $this = $(this);
       var ult_sticky = $this.find('.ult-sticky');
+      //var fullwidth_row = false; //for Browser full width row
+      
+      // if ( $this.parents('.upb-background-text').length ){ // has parent
+      //   fullwidth_row = true;
+      // }
+      
       var mobile = ult_sticky.data('mobile');
       var ult_space = $this.find('.ult-space');
       if ( _windowsize < 768 && mobile == 'no' ){
@@ -101,8 +187,28 @@ function inside_row () {
       var div_top = $this.offset().top;
       var win_height = _window.height();
       var stick_behaviour = ult_sticky.data('stick_behaviour');
+      var support = ult_sticky.data('support');
 
-      if( stick_behaviour == 'stick_with_scroll_row' ){
+      // if( fullwidth_row = true && $this.hasClass( "is_stuck" ) ){
+      //   var s = _window.scrollTop();
+      //   var parent_height = $this.closest(".wpb_column").parent().parent().innerHeight();
+      //   var parent_offset = $this.closest(".wpb_column").parent().parent().offset().top;
+      //   var parent_offset_height = parseInt(parent_offset) + parseInt(parent_height);
+      //   var y = $this.parent().offset().top;
+      //   var z = s-y+50;
+      //   var anchor_height = s + 50 + $this.outerHeight();
+
+      //   console.log(parent_offset);
+      //   console.log(window_top);
+        
+      //   if( anchor_height < parent_offset_height  ){
+      //     top_for_row = z;
+      //     $this.css('position','absolute');
+      //     $this.css('top',z + 'px');
+      //   }
+      //   return;
+      // }
+      if( stick_behaviour == 'stick_with_scroll_row' || support == 'yes'){
         return;
       }
 

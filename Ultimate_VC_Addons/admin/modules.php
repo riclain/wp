@@ -55,6 +55,7 @@
 		'Ultimate_Tab' =>'Advanced Tabs',
 		'Ultimate_Team' =>'Ultimate Teams',
 		'Ultimate_Sticky_Section' => 'Sticky Section',
+		'Ultimate_Range_Slider' => 'Range Slider',
 	);
 ?>
 

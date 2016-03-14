@@ -156,10 +156,10 @@
 						else if($(this).hasClass("ifb-custom-height"))
 						{
 							//console.log("custom");
-						 //if(h!='') {
-						 	// $(this).css('height', h);
+						 if(h!='') {
+						 	$(this).css('height', h);
 						 	
-						 	$(this).css('height', 'initial');
+						 	//$(this).css('height', 'initial');
 
 							if($(this).find(".ifb-back").find(".ifb-flip-box-section").hasClass("ifb-flip-box-section-vertical-middle"))
 							{
@@ -194,7 +194,7 @@
 									}
 							}
 
-						 //}
+						 }
 						}
 					   
 						else{

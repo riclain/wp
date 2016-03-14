@@ -330,7 +330,7 @@ function setmytime(){
     var styleflag=true;
    //console.log("praj");
    //for link and to tab 
-    var type = window.location.hash.substr(1);
+    var type = escape( window.location.hash.substr(1) );
     // console.log(type);
    //console.log(jQuery("#"+type).attr('class'));
     if(type!='')

@@ -4,7 +4,7 @@ Plugin Name: Ultimate Addons for Visual Composer
 Plugin URI: https://brainstormforce.com/demos/ultimate/
 Author: Brainstorm Force
 Author URI: https://www.brainstormforce.com
-Version: 3.15.0
+Version: 3.16.0.1
 Description: Includes Visual Composer premium addon elements like Icon, Info Box, Interactive Banner, Flip Box, Info List & Counter. Best of all - provides A Font Icon Manager allowing users to upload / delete custom icon fonts.
 Text Domain: ultimate_vc
 */
@@ -12,7 +12,7 @@ if(!defined('__ULTIMATE_ROOT__')){
 	define('__ULTIMATE_ROOT__', dirname(__FILE__));
 }
 if(!defined('ULTIMATE_VERSION')){
-	define('ULTIMATE_VERSION', '3.15.0');
+	define('ULTIMATE_VERSION', '3.16.0.1');
 }
 
 register_activation_hook( __FILE__, 'uvc_plugin_activate');
@@ -46,6 +46,26 @@ function uvc_plugin_activate()
 		update_option('ultimate_js', 'enable');
 	if(!get_option('ultimate_css') || get_option('ultimate_css') == '')
 		update_option('ultimate_css', 'enable');
+}
+
+add_action('vc_after_init', 'load_ulitmate_presets');
+function load_ulitmate_presets()  {
+	$ultimate_preset_path = realpath(dirname(__FILE__).'/presets');
+	foreach (glob($ultimate_preset_path."/*.php") as $filename) {
+		include_once($filename);
+		$base = (isset($array['base'])) ? $array['base'] : '';
+		if($base === '')
+			continue;
+		$presets = (isset($array['presets'])) ? $array['presets'] : array();
+		if(empty($presets))
+			continue;
+		foreach ($presets as $key => $preset) {
+			$title = (isset($preset['title'])) ? $preset['title'] : '';
+			$default = (isset($preset['default'])) ? $preset['default'] : '';
+			$settings = (isset($preset['settings'])) ? $preset['settings'] : array();
+			do_action( 'vc_register_settings_preset', $title, $base, $settings, $default );
+		}
+	}
 }
 
 if(!class_exists('Ultimate_VC_Addons'))
@@ -300,6 +320,7 @@ if(!class_exists('Ultimate_VC_Addons'))
 
 					|| stripos( $post_content, '[ult_team')
 					|| stripos( $post_content, '[ultimate_fancytext')
+					|| stripos( $post_content, '[ult_range_slider')
 					|| $found_ultimate_backgrounds
 				) {
 				return true;
@@ -456,6 +477,13 @@ if(!class_exists('Ultimate_VC_Addons'))
 							wp_enqueue_script('googleapis');
 					}
 
+					if( stripos( $post_content, '[ult_range_slider') ) {
+						wp_enqueue_script('jquery-ui-mouse');
+						wp_enqueue_script('jquery-ui-widget');
+						wp_enqueue_script('jquery-ui-slider');
+						wp_enqueue_script('ult_range_tick');
+					}
+
 					wp_enqueue_script('ultimate-script');
 
 					if( stripos( $post_content, '[ultimate_modal') ) {
@@ -596,18 +624,22 @@ if(!class_exists('Ultimate_VC_Addons'))
 					}
 
 					if( stripos( $post_content, '[ult_sticky_section') ) {
+						wp_enqueue_script('ult_sticky_js');
 						wp_enqueue_script('ult_sticky_section_js');
 					}
-
-					if( stripos( $post_content, '[ult_sticky_section') ) {
-						wp_enqueue_script('ult_sticky_js');
-					}
-
 
 					if( stripos( $post_content, '[ult_team') ) {
 						wp_enqueue_script('ultimate-team');
 					}
 
+					if( stripos( $post_content, '[ult_range_slider') ) {
+						wp_enqueue_script('jquery-ui-mouse');
+						wp_enqueue_script('jquery-ui-widget');
+						wp_enqueue_script('jquery-ui-slider');
+						wp_enqueue_script('ult_range_tick');
+						wp_enqueue_script('ult_range_slider_js');
+						wp_enqueue_script('ult_ui_touch_punch');
+					}
 				}
 
 				$ultimate_css = get_option('ultimate_css');
@@ -755,12 +787,14 @@ if(!class_exists('Ultimate_VC_Addons'))
 					if( stripos( $post_content, '[ultimate_exp_section') ) {
 						wp_enqueue_style('style_ultimate_expsection');
 					}
-
 					if( stripos( $post_content, '[ult_sticky_section') ) {
 						wp_enqueue_style('ult_sticky_section_css');
 					}
 					if( stripos( $post_content, '[ult_team') ) {
 						wp_enqueue_style('ultimate-team');
+					}
+					if( stripos( $post_content, '[ult_range_slider') ) {
+						wp_enqueue_style('ult_range_slider_css');
 					}
 				}
 			}
@@ -839,9 +873,9 @@ if(!class_exists('Ultimate_VC_Addons'))
 				'ultimate_image_separator',
 				'ultimate_expandable_section',
 				'ultimate_tab',
-
 				'ultimate_sticky_section',
 				'ultimate_team',
+				'ultimate_range_slider',
 			);
 			$ultimate_modules = get_option('ultimate_modules');
 			if(!$ultimate_modules && !is_array($ultimate_modules)){

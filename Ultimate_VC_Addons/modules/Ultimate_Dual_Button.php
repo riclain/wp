@@ -165,7 +165,7 @@ $divider_style = $divider_text = $divider_text_color = $divider_bg_color = $divi
 				//'btn_color_hoverborder'=>' ',
 
 			),$atts));
-	
+
 			$vc_version = (defined('WPB_VC_VERSION')) ? WPB_VC_VERSION : 0;
 			$is_vc_49_plus = (version_compare(4.9, $vc_version, '<=')) ? 'ult-adjust-bottom-margin' : '';
 
@@ -175,7 +175,7 @@ $divider_style = $divider_text = $divider_text_color = $divider_bg_color = $divi
 			$secicon=$style1= $dual_design_style_css ='';
 			 $dual_design_style_css = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class( $css_dualbtn_design, ' ' ), "ult_dualbutton", $atts );
 			 $dual_design_style_css = esc_attr( $dual_design_style_css );
-			
+
 			if($icon_link !== ''){
 				 $href = vc_build_link($icon_link);
 				$target =(isset($href['target'])) ? "target='".$href['target']."'" :'';
@@ -193,7 +193,7 @@ $divider_style = $divider_text = $divider_text_color = $divider_bg_color = $divi
 			if($icon_type == 'custom'){
 				if($icon_img!==''){
 				$img = apply_filters('ult_get_img_single', $icon_img, 'url');
-				$alt = get_post_meta($icon_img, '_wp_attachment_image_alt', true);
+				$alt = apply_filters('ult_get_img_single', $icon_img, 'alt');
 				if($icon_style !== 'none'){
 					if($icon_color_bg !== '')
 						$style .= 'background:'.$icon_color_bg.';';
@@ -290,7 +290,7 @@ $style2=$href1 =$target2=$img2=$alt1 =$iconoutput2=$url2='';
 
 if($btn_icon_type == 'custom'){
 				$img2 = apply_filters('ult_get_img_single', $btn_icon_img, 'url');
-				$alt2 = get_post_meta($btn_icon_img, '_wp_attachment_image_alt', true);
+				$alt2 = apply_filters('ult_get_img_single', $btn_icon_img, 'alt');
 				if($btn_icon_style !== 'none'){
 					if($btn_icon_color_bg !== '')
 						$style2 .= 'background:'.$btn_icon_color_bg.';';
@@ -494,7 +494,7 @@ border-radius: 50%;
 background-color:'.$divider_bg_color.';';
 
 $img3 = apply_filters('ult_get_img_single', $divider_icon_img, 'url');
-				$alt3 = get_post_meta($divider_icon_img, '_wp_attachment_image_alt', true);
+$alt3 = apply_filters('ult_get_img_single', $divider_icon_img, 'alt');
 $text='<img class="img-icon" alt="'.$alt3.'" src="'.$img3.'" style="'.$text_style.'" />';
 
 }
@@ -672,6 +672,24 @@ if($iconoutput2==''){
 			$subop .='</div>
 			</div>
 			</div>';
+
+			$is_preset = false; //Retrieve preset Code
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$subop .= '<pre>';
+				$subop .= $text;
+				$subop .= '</pre>'; // remove backslash once copied
+			}
 
 		return 	$subop ;
 

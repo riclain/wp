@@ -498,14 +498,14 @@ if(!class_exists('Ultimate_CountDown'))
             $countdown_design_style = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class( $css_countdown, ' ' ), "ult_countdown", $atts );
             $countdown_design_style = esc_attr( $countdown_design_style );
             $countdown_id = 'countdown-wrap-'.rand(1000, 9999);
-            $ult_countdown_args = array(
-                'target' => '#'.$countdown_id.' .ult_countdown_amount', // set targeted element e.g. unique class/id etc.
-                'media_sizes' => array(
-                    'font-size' => $tick_size, // set 'css property' & 'ultimate_responsive' sizes. Here $title_responsive_font_size holds responsive font sizes from user input.
-                   	//'line-height' => $title_font_line_height
-                ),
-            );
-			$data_list = get_ultimate_vc_responsive_media_css($ult_countdown_args);
+   //          $ult_countdown_args = array(
+   //              'target' => '#'.$countdown_id.' .ult_countdown-amount', // set targeted element e.g. unique class/id etc.
+   //              'media_sizes' => array(
+   //                  'font-size' => $tick_size, // set 'css property' & 'ultimate_responsive' sizes. Here $title_responsive_font_size holds responsive font sizes from user input.
+   //                 	//'line-height' => $title_font_line_height
+   //              ),
+   //          );
+			// $data_list = get_ultimate_vc_responsive_media_css($ult_countdown_args);
 
 			$data_attr = '';
 			if($count_frmt=='') $count_frmt = 'DHMS';
@@ -535,7 +535,7 @@ if(!class_exists('Ultimate_CountDown'))
 			$data_attr .= ' data-tick-style="'.$tick_style.'" ';
 			$data_attr .= ' data-tick-p-style="'.$tick_sep_style.'" ';
 			$data_attr .= ' data-bg-color="'.$timer_bg_color.'" data-br-radius="'.$br_radius.'" data-padd="'.$br_time_space.'" ';
-			$output = '<div "'.$count_down_sep_data_list.'" class="ult_countdown '.$countdown_design_style.' '.$el_class.' '.$count_style.'">';
+			$output = '<div "'.$count_down_sep_data_list.'" class="ult-responsive ult_countdown '.$countdown_design_style.' '.$el_class.' '.$count_style.'">';
 
 			//Responsive param
 
@@ -552,9 +552,26 @@ if(!class_exists('Ultimate_CountDown'))
 			$count_down_data_list = get_ultimate_vc_responsive_media_css($count_down_args);
 
 			if($datetime!=''){
-				$output .='<div id="'.$count_down_id.'"  class="ult_countdown-div ult_countdown-dateAndTime '.$ult_tz.'" data-labels="'.$labels.'" data-labels2="'.$labels2.'"  data-terminal-date="'.$datetime.'" data-countformat="'.$count_frmt.'" data-time-zone="'.get_option('gmt_offset').'" data-time-now="'.str_replace('-', '/', current_time('mysql')).'"  data-tick-col="'.$tick_col.'"  '.$count_down_data_list.' data-tick-p-col="'.$tick_sep_col.'" '.$data_attr.'>'.$datetime.'</div>';
+				$output .='<div id="'.$count_down_id.'"  class="ult-responsive ult_countdown-div ult_countdown-dateAndTime '.$ult_tz.'" data-labels="'.$labels.'" data-labels2="'.$labels2.'"  data-terminal-date="'.$datetime.'" data-countformat="'.$count_frmt.'" data-time-zone="'.get_option('gmt_offset').'" data-time-now="'.str_replace('-', '/', current_time('mysql')).'"  data-tick-col="'.$tick_col.'"  '.$count_down_data_list.' data-tick-p-col="'.$tick_sep_col.'" '.$data_attr.'>'.$datetime.'</div>';
 			}
 			$output .='</div>';
+			$is_preset = false;
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>'; // remove backslash once copied
+			}
 			return $output;
 		}
 	}

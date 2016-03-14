@@ -226,10 +226,13 @@ if(!class_exists('AIO_Info_list'))
 
 			if($icon_type == "custom"){
 				$img = apply_filters('ult_get_img_single', $icon_img, 'url', 'large');
+				$alt = apply_filters('ult_get_img_single', $icon_img, 'alt');
+				if($alt == '')
+					$alt = 'icon';
 				//if(!empty($img)){
 
 				$icon_html .= '<div class="icon_list_icon" '.$css_trans.' style="'.$this->icon_style.'">';
-				$icon_html .= '<img class="list-img-icon" alt="icon" src="'.$img.'"/>';
+				$icon_html .= '<img class="list-img-icon" alt="'.$alt.'" src="'.$img.'"/>';
 				if($is_link && $info_list_link_apply == 'icon')
 					$icon_html .= $info_list_link_html;
 				$icon_html .= '</div>';

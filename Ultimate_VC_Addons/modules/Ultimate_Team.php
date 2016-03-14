@@ -223,6 +223,7 @@ if(!class_exists("Ultimate_Team")){
 			}
 
 			$img = apply_filters('ult_get_img_single', $image, 'url');
+			$alt = apply_filters('ult_get_img_single', $image, 'alt');
 
 			// Code for Responsive font-size [Open]
 			$id = uniqid('ultimate-heading');
@@ -292,7 +293,7 @@ if(!class_exists("Ultimate_Team")){
 				if ( $link_switch == 'on' ) {
 			        echo '<a href="'. $url .'" target="'. $target  .'">';
 			    }
-				echo '<div class="ult-team-member-image ' . $id . '" style="'. esc_attr( $team_image_style ).'; background-color:' . $team_img_bg_color. '" data-hover_opacity="' . $team_img_hover_opacity_style3 . '" > <img class="'. $team_img_grayscale_cls. '" src="' . esc_url( $img ) . '" alt="" >';
+				echo '<div class="ult-team-member-image ' . $id . '" style="'. esc_attr( $team_image_style ).'; background-color:' . $team_img_bg_color. '" data-hover_opacity="' . $team_img_hover_opacity_style3 . '" > <img class="'. $team_img_grayscale_cls. '" src="' . esc_url( $img ) . '" alt="'.$alt.'" >';
 				echo '<span class="ult-team-member-image-overlay ' . esc_attr( $img_hver_class ) . '" ' . $img_hver_data . ' ></span>';
 				if ( $content ) {
 			        echo '<div class="ult-team-member-description ult-responsive" ' . $team_member_desc_responsive . ' style="' . $team_member_description_font_styling . '; text-align:' . $team_member_align_style . ';' . $title_box_style . '; "><p>' . do_shortcode( $content ) . '</p></div>';
@@ -361,7 +362,7 @@ if(!class_exists("Ultimate_Team")){
 				if ( $link_switch == 'on' ) {
 			        echo '<a href="'. $url .'" target="'. $target  .'" style="text-decoration: none;">';
 			    }
-				echo '<div class="ult-team-member-image" style="'. esc_attr( $team_image_style ).'" data-opacity="' . $team_img_opacity . '" data-hover_opacity="' . $team_img_hover_opacity . '" > <img src="' . esc_url( $img ) . '" alt=""  style="opacity:'. $team_img_opacity .'">';
+				echo '<div class="ult-team-member-image" style="'. esc_attr( $team_image_style ).'" data-opacity="' . $team_img_opacity . '" data-hover_opacity="' . $team_img_hover_opacity . '" > <img src="' . esc_url( $img ) . '" alt="'.$alt.'"  style="opacity:'. $team_img_opacity .'">';
 				echo '</div>';//ult-team-member-image
 
 			    echo '<div class="ult-team-member-bio-wrap ' . $id . '">';
@@ -429,7 +430,7 @@ if(!class_exists("Ultimate_Team")){
 				if ( $link_switch == 'on' ) {
 			        echo '<a href="'. $url .'" target="'. $target  .'">';
 			    }
-				echo '<div class="ult-team-member-image" style="'. esc_attr( $team_image_style ).'"> <img class="'. $team_img_grayscale_cls. '" src="' . esc_url( $img ) . '" alt=""  style="">';
+				echo '<div class="ult-team-member-image" style="'. esc_attr( $team_image_style ).'"> <img class="'. $team_img_grayscale_cls. '" src="' . esc_url( $img ) . '" alt="'.$alt.'"  style="">';
 				echo '<span class="ult-team-member-image-overlay ' . esc_attr( $img_hver_class ) . '" ' . $img_hver_data . ' ></span>';
 				if ( $link_switch == 'on' ) {
 			        echo '</a>';
@@ -494,6 +495,25 @@ if(!class_exists("Ultimate_Team")){
 				echo '</div>'; //ult-team-member-bio-wrap
 				echo '</div>'; //ult-team-member-wrap
 			}
+			$is_preset = false; //Display settings for Preset
+			$output = '';
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output = '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
+			echo $output;
 			return ob_get_clean();
 		}
 		function init_team(){

@@ -166,7 +166,7 @@ if(!class_exists('Ultimate_Image_Separator'))
 				$ultimate_custom_vc_row = 'wpb_row';
 
 			$img = apply_filters('ult_get_img_single', $img_separator, 'url');
-			$alt = get_post_meta($img_separator, '_wp_attachment_image_alt', true);
+			$alt = apply_filters('ult_get_img_single', $img_separator, 'alt');
 
 			$id = 'ult-easy-separator-'.uniqid(rand());
 

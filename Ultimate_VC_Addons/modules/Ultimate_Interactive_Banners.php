@@ -412,7 +412,7 @@ if(!class_exists('AIO_Interactive_Banners'))
 		// Shortcode handler function for stats banner
 		function banner_shortcode($atts)
 		{
-			$banner_title = $banner_title_line_height = $banner_desc = $banner_desc_line_height = $banner_icon = $banner_image = $banner_link = $banner_link_text = $banner_style = $banner_bg_color = $el_class = $animation = $icon_disp = $link_opts = $banner_title_location = $banner_title_style_inline = $banner_desc_style_inline = $banner_overlay_bg_color = $banner_link_text_color = $banner_link_bg_color = '';
+			$banner_title = $banner_title_line_height = $banner_desc = $banner_desc_line_height = $banner_icon = $banner_image = $banner_link = $banner_link_text = $banner_style = $banner_bg_color = $el_class = $animation = $icon_disp = $link_opts = $banner_title_location = $banner_title_style_inline = $banner_desc_style_inline = $banner_overlay_bg_color = $banner_link_text_color = $banner_link_bg_color = $css_ibanner = '';
 			extract(shortcode_atts( array(
 				'banner_title' => '',
 				'banner_desc' => '',
@@ -532,6 +532,7 @@ if(!class_exists('AIO_Interactive_Banners'))
 			if($banner_icon !== '')
 				$icon = '<i class="'.$banner_icon.'"  style= "'.$icon_style.'"></i>';
 			$img = apply_filters('ult_get_img_single', $banner_image, 'url');
+			$alt = apply_filters('ult_get_img_single', $banner_image, 'alt');
 			$href = vc_build_link($banner_link);
 			if(isset($href['target']) && $href['target'] != ''){
 				$target = 'target="'.$href['target'].'"';
@@ -542,7 +543,7 @@ if(!class_exists('AIO_Interactive_Banners'))
 			}
 			$output .= "\n".'<div id="'.$interactive_banner_1_id.'" class="ult-banner-block '.$is_vc_49_plus.' ult-bb-'.$link_opts.' '.$banner_height.' banner-'.$banner_style.' '.$el_class.'"  '.$css_trans.' style="'.$banner_top_style.''.$headerstyle.'">';
 			if($img !== '')
-				$output .= "\n\t".'<img src="'.$img.'" alt="'.$banner_title.'">';
+				$output .= "\n\t".'<img src="'.$img.'" alt="'.$alt.'">';
 			if($banner_title !== ''){
 				$output .= "\n\t".'<h3 '.$interactive_banner_1_data_list.' class="title-'.$banner_title_location.' bb-top-title ult-responsive" style="'.$banner_title_style_inline.'">'.$banner_title;
 				if($icon_disp == "with_heading" || $icon_disp == "both")
@@ -572,6 +573,23 @@ if(!class_exists('AIO_Interactive_Banners'))
 				//$banner_with_link = '<a class="bb-link" href="'.$href['url'].'" '.$target.'>'.$output.'</a>';
 				//return $banner_with_link;
 			//} else {
+			$is_preset = false; //Display settings for Preset
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
 				return $output;
 			//}
 		}

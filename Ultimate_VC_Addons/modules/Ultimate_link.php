@@ -397,6 +397,23 @@ if($link_hover_style=='Style_2'){
 			</span>';
 	 	 }
 	 	 if($text!=''){
+	 	 	$is_preset = false; // Preset setting array display
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
 	 	 	return $output;
 	 	 }
 	//return $output;

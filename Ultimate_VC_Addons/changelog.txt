@@ -1,3 +1,50 @@
+1.16.0.1
+- Fix: PHP error appearing on some of the PHP old versions for the range slider.
+
+3.16.0
+- New: Element Range Slider.
+- Fix: Important security vulnerability. Thank you Ivan (https://hackerone.com/reactors08) for reporting this privately.
+- Fix: Countdown Timer responsive font size options were not working.
+- Fix: Countdown Timer kept adding <style> tags on each count-down.
+- Fix: Info-Circle link is not working on mobile devices
+- Fix: Images in Hot-spot element were not working.
+- Fix: Hot-spot element tooltip was not working.
+- Fix: improved the scroll on advanced tabs on mobile devices.
+
+3.15.2
+- Fixed: Row stretch not working after VC 4.10
+
+3.15.1
+- Fixed: Fancy text - Multiple lines sliding at a time
+- Fixed: Team - Opacity option not working
+- Fixes for Sticky section
+- Improvement: Image param - alt text can be set through media uploader for all elements
+- 100+ Presets for 15+ elements
+
+Quick Video - http://bsf.io/7a3wp
+
+Elements - 
+
+* Advanced Button
+* Countdown Timer
+* Dual button
+* Flipbox
+* Google Map
+* Headings
+* Highlight Box
+* Info box
+* Info Tables
+* Interactive banner
+* Interactive Banner 2
+* Just Icon
+* Creative link
+* Modal Box
+* Pricing Tables
+* Counter
+* Team module 
+
+Note - Images are not possible to add into presets, hence, image should be selected once preset loaded in few elements.
+
 3.15.0
 - New element: Sticky section
 - Improvement: Infor Circle - Link support

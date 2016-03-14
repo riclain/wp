@@ -59,9 +59,9 @@ jQuery(document).ready(function(a) {
 
               if (c = a(b.target).is("i") ? a(b.target).parent() : a(b.target), c.hasClass("ult-tabto-actitle")) {
                 var d = c.parent().next();
-               console.log('1');
+               //console.log('1');
                 var animation=c.parents('.ult-tabto-accordion').data('animation');
-                console.log(d);
+               // console.log(d);
 
                if(d.nextAll('dd').hasClass("cq-animateIn")){
                    d.nextAll('dd').removeClass("cq-animateIn").addClass(" cq-animateOut ult-tabto-accolapsed");
@@ -131,7 +131,7 @@ jQuery(document).ready(function(a) {
             else if (c = a(b.target).is("span.ult-span-text.ult_acordian-text") ? a(b.target).parent().parent() : a(b.target), c.hasClass("ult-tabto-actitle")) {
                 var d = c.parent().next();
                 var animation=c.parents('.ult-tabto-accordion').data('animation');
-              console.log('2');
+              //console.log('2');
                    if(d.nextAll('dd').hasClass("cq-animateIn")){
                    d.nextAll('dd').removeClass("cq-animateIn").addClass(" ult-ac-slideup ult-tabto-accolapsed");
 
@@ -326,7 +326,10 @@ jQuery(document).ready(function(a) {
 
 
             }
-
+            //console.log("here");
+            jQuery('html, body').animate({
+              scrollTop: a(this).offset().top-100
+            }, 1200);
         })
     })
 });

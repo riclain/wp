@@ -58,7 +58,8 @@ module.exports = function(grunt) {
 							'!assets/js/smoothscoll-mousewheel.js',
 							'!assets/js/smoothscroll-easing.js',
 							'!assets/js/smoothscroll-simplr-smoothscroll.js',
-							'!assets/js/jquery.js'
+							'!assets/js/jquery.js',
+							'!assets/js/jquery-ui-labeledslider.js'
 						],
 					dest: 'assets/min-js/ultimate.min.js'
 				},

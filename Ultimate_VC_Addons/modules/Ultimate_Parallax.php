@@ -174,8 +174,11 @@ if(!class_exists('VC_Ultimate_Parallax')){
 				if(defined('WPB_VC_VERSION'))
 					$vc_version = WPB_VC_VERSION;
 
+				$is_vc_4_4 = (version_compare($vc_version, '4.4', '<')) ? true : false;
+
 				$commom_data_attributes .= ' data-custom-vc-row="'.$ultimate_custom_vc_row.'" ';
 				$commom_data_attributes .= ' data-vc="'.$vc_version.'" ';
+				$commom_data_attributes .= ' data-is_old_vc="'.$is_vc_4_4.'" ';
 				$commom_data_attributes .= ' data-theme-support="'.$ultimate_theme_support.'" ';
 
 				//if($disable_on_mobile != '')

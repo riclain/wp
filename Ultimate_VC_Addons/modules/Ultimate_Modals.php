@@ -231,7 +231,8 @@ if(!class_exists('Ultimate_Modals'))
 			if($icon_type == 'custom'){
 				//$ico_img = wp_get_attachment_image_src( $icon_img, 'large');
 				$ico_img = apply_filters('ult_get_img_single', $icon_img, 'url');
-				$box_icon = '<div class="modal-icon"><img src="'.$ico_img.'" class="ult-modal-inside-img"></div>';
+				$ico_alt = apply_filters('ult_get_img_single', $icon_img, 'alt');
+				$box_icon = '<div class="modal-icon"><img src="'.$ico_img.'" class="ult-modal-inside-img" alt="'.$ico_alt.'"></div>';
 			} elseif($icon_type == 'selector'){
 				if($icon !== '')
 					$box_icon = '<div class="modal-icon"><i class="'.$icon.'"></i></div>';
@@ -266,7 +267,8 @@ if(!class_exists('Ultimate_Modals'))
 						$modal_class .= ' '.$el_class.'-image ';
 					// $img = wp_get_attachment_image_src( $btn_img, 'large');
 					$img = apply_filters('ult_get_img_single', $btn_img, 'url');
-					$html .= '<img src="'.$img.'" data-class-id="content-'.$uniq.'" class="ult-modal-img '.$modal_class.' ult-align-'.$modal_on_align.' ult-modal-image-'.$el_class.'" '.$modal_data_class.'/>';
+					$btn_alt = apply_filters('ult_get_img_single', $btn_img, 'alt');
+					$html .= '<img src="'.$img.'" alt="'.$btn_alt.'" data-class-id="content-'.$uniq.'" class="ult-modal-img '.$modal_class.' ult-align-'.$modal_on_align.' ult-modal-image-'.$el_class.'" '.$modal_data_class.'/>';
 				}
 			}
 			elseif($modal_on == "onload"){
@@ -353,6 +355,25 @@ if(!class_exists('Ultimate_Modals'))
 			$html .= "\n\t".'</div>';
 			$html .= "\n\t".'<div class="ult-overlay-close">Close</div>';
 			$html .= "\n".'</div>';
+
+			$is_preset = false; //Display settings for Preset
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$html .= '<pre>';
+				$html .= $text;
+				$html .= '</pre\>';
+			}
+
 			return $html;
 		}
 		/* Add modal popup Component*/

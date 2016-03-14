@@ -50,6 +50,32 @@
 				var hotspot_size = container_element_params.main_img_size;
 				var hotspot_custom_size = container_element_params.main_img_width;
 
+				var t = hotspot_image.split('|');
+				var id = '';
+				var url = '';
+				if( t != 'undefined' && t != null ) {
+					jQuery.each( t , function(index, val) {
+
+						//	Start with 'id:' or 'id^'
+					    if ( val.startsWith("id:") ) {
+							id = val.split("id:").pop();
+					    }
+					    if ( val.startsWith("id^") ) {
+							id = val.split("id^").pop();
+					    }
+					    //	Start with 'url:' or 'url^'
+					    if ( val.startsWith("url:") ) {
+							url = val.split("url:").pop();
+					    }
+					    if ( val.startsWith("url^") ) {
+							url = val.split("url^").pop();
+					    }
+					});
+				}
+				if( id != null && id != 'undefined' && url != null && url != 'undefined' ) {
+					hotspot_image = id + '|' + url;
+				}
+
 				if(typeof container_element_params.main_img_width != 'undefined')
 					hotspot_custom_size = container_element_params.main_img_width;
 

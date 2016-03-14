@@ -271,7 +271,10 @@ if(!class_exists('Ultimate_Info_Circle'))
 				$icon_type_class = 'ult-info-circle-icon';
 			} else {
 				$img = apply_filters('ult_get_img_single', $info_img, 'url');
-				$icon_html .= '<img class="info-circle-img-icon" alt="icon" src="'.$img.'"/>';
+				$alt = apply_filters('ult_get_img_single', $info_img, 'alt');
+				if($alt == '')
+					$alt = 'icon';
+				$icon_html .= '<img class="info-circle-img-icon" alt="'.$alt.'" src="'.$img.'"/>';
 				$icon_type_class = 'ult-info-circle-img';
 			}
 			if($icon_bg_color!=''){
@@ -305,8 +308,16 @@ if(!class_exists('Ultimate_Info_Circle'))
 			}
 			$output .='<div class="info-details" data-icon-class="'.$icon_type_class.'">';
 			//$output .=$icon_html;
-			$output .='<div class="info-circle-def"><div  class="info-circle-sub-def">'.$icon_html.'<div class="responsive-font-class ult-responsive" '.$info_circle_desc_data_list.'><h3 '.$info_circle_data_list.' class="info-circle-heading ult-responsive new-cust-responsive-class" style="'.$title_style_inline.'">'.$info_title.'</h3><div '.$info_circle_desc_data_list.' class="info-circle-text " style="'.$desc_style_inline.'">'.do_shortcode($content).'</div></div></div></div></div>';
+			if( !empty($href['url']) ){
+				// $href = vc_build_link($ilink);
+				if(isset($href['target'])){
+									$target = 'target="'.$href['target'].'"';
+								}
+			$output .='<div class="info-circle-def"><div  class="info-circle-sub-def"><a class="info-circle-href" href="'.$href['url'].'" style="color:inherit;" '.$target.'>'.$icon_html.'</a><div class="responsive-font-class ult-responsive" '.$info_circle_desc_data_list.'><h3 '.$info_circle_data_list.' class="info-circle-heading ult-responsive new-cust-responsive-class" style="'.$title_style_inline.'">'.$info_title.'</h3><div '.$info_circle_desc_data_list.' class="info-circle-text " style="'.$desc_style_inline.'">'.do_shortcode($content).'</div></div></div></div></div>';
 						//$output .= wpb_js_remove_wpautop($content, true);
+			}else{
+				$output .='<div class="info-circle-def"><div  class="info-circle-sub-def">'.$icon_html.'<div class="responsive-font-class ult-responsive" '.$info_circle_desc_data_list.'><h3 '.$info_circle_data_list.' class="info-circle-heading ult-responsive new-cust-responsive-class" style="'.$title_style_inline.'">'.$info_title.'</h3><div '.$info_circle_desc_data_list.' class="info-circle-text " style="'.$desc_style_inline.'">'.do_shortcode($content).'</div></div></div></div></div>';
+			}
 			return $output;
 		}
 		function add_info_circle()

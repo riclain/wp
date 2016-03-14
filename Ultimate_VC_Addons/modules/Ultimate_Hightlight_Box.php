@@ -540,7 +540,23 @@ if(!class_exists('Ultimate_Highlight_Box'))
 					$output .= '<div class="ultimate-ctaction-icon ctaction-icon-'.$effect.'">'.$icon_inline.'</div>';
 				$output .= '<div class="uvc-ctaction-data uvc-ctaction-data-'.$effect.' ult-responsive">'.do_shortcode($content).'</div>';
 			$output .= $ctaction_link_html.'</div>';
-
+			$is_preset = false; //Display settings for Preset
+			if(isset($_GET['preset'])) {
+				$is_preset = true;
+			}
+			if($is_preset) {
+				$text = 'array ( ';
+				foreach ($atts as $key => $att) {
+					$text .= '<br/>	\''.$key.'\' => \''.$att.'\',';
+				}
+				if($content != '') {
+					$text .= '<br/>	\'content\' => \''.$content.'\',';
+				}
+				$text .= '<br/>)';
+				$output .= '<pre>';
+				$output .= $text;
+				$output .= '</pre>';
+			}
 			return $output;
 		}
 	}

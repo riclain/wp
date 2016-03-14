@@ -462,9 +462,9 @@ if(!class_exists('Ultimate_FancyText')){
 			$string_inline_style = $vticker_inline = $valign = $prefsuf_style = $css_design_style = '';
 
 			$css_design_style = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class( $css_fancy_design, ' ' ), "ultimate_fancytext", $atts );
-			
+
 			$css_design_style = esc_attr( $css_design_style );
-			
+
 			if($strings_font_family != '')
 			{
 				$font_family = get_ultimate_font_family($strings_font_family);
@@ -616,31 +616,19 @@ if(!class_exists('Ultimate_FancyText')){
 				{
 					$output .= '<script type="text/javascript">
 						jQuery(function($){
-								$(document).ready(function(){
-									$("#vticker-'.$id.'").find("li").css("opacity","1");
-									$("#vticker-'.$id.'")
-										.vTicker(
-										{
-											speed: '.$strings_tickerspeed.',
-											showItems: '.$ticker_show_items.',
-											pause: '.$ticker_wait_time.',
-											mousePause : '.$ticker_hover_pause.',
-											direction: "'.$direction.'",
-										}
-									);
-								});
-								$(window).load(function(){
-									$("#vticker-'.$id.'")
-										.vTicker(
-										{
-											speed: '.$strings_tickerspeed.',
-											showItems: '.$ticker_show_items.',
-											pause: '.$ticker_wait_time.',
-											mousePause : '.$ticker_hover_pause.',
-											direction: "'.$direction.'",
-										}
-									);
-								});
+							$(document).ready(function(){
+								$("#vticker-'.$id.'").find("li").css("opacity","1");
+								$("#vticker-'.$id.'")
+									.vTicker(
+									{
+										speed: '.$strings_tickerspeed.',
+										showItems: '.$ticker_show_items.',
+										pause: '.$ticker_wait_time.',
+										mousePause : '.$ticker_hover_pause.',
+										direction: "'.$direction.'",
+									}
+								);
+							});
 						});
 					</script>';
 				}

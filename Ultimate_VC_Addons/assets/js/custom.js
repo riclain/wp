@@ -231,8 +231,10 @@
 					setTimeout(function() {
 						jQuery('.jstime .timeline-wrapper').masonry({
 							"itemSelector": '.timeline-block',
+							"width" : "401px"
 						});
 						jQuery(this).find('.timeline-block').each(function(){
+							jQuery(this).css('left','initial');
 							if(jQuery(this).css('left')=='0px'){
 								jQuery(this).addClass('timeline-post-left');
 							}

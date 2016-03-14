@@ -170,6 +170,10 @@
 	background-image: url(../img/icon-sticky-section.png) !important;
 	background-position: 0 0 !important;
 }
+.vc_icon_range_slider {
+	background-image: url(../img/icon-range-slider.png) !important;
+	background-position: 0 0 !important;
+}
 a#ult_tab_element .vc_element-icon,
 .ult_tab_eleicon {
 	background-image: url(../img/tab-icon.png) !important;

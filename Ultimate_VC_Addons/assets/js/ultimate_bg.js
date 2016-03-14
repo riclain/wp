@@ -1,6 +1,22 @@
 (function ( $ ) {
 	jQuery(document).ready(function(){
 
+		function version_compare(strVersionA, strVersionB) {
+		    var arrVersionA = strVersionA.split('.');
+		    var arrVersionB = strVersionB.split('.');
+		    var intVersionA = (100000000 * parseInt(arrVersionA[0])) + (1000000 * parseInt(arrVersionA[1])) + (10000 * parseInt(arrVersionA[2]));
+		    var intVersionB = (100000000 * parseInt(arrVersionB[0])) + (1000000 * parseInt(arrVersionB[1])) + (10000 * parseInt(arrVersionB[2]));
+
+		    if (intVersionA > intVersionB) {
+		        return 1;
+		    }else if(intVersionA < intVersionB){
+		        return -1;
+		    }else{
+		        return 0;
+		    }
+		    return false;
+		}
+
 		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			$('html').addClass('ult-remove-fixed-background');
 		}
@@ -380,12 +396,16 @@
 				var vc_row_class = selector.data('custom-vc-row');
 				var vc = selector.data('vc');
 				var theme_support = selector.data('theme-support');
+				var is_vc_4_4 = selector.data('is_old_vc');
 
 				if(typeof vc_row_class === 'undefined' || vc_row_class === '')
 					vc_row_class = 'wpb_row';
 
 				if(typeof vc === 'undefined')
 					vc = 0;
+
+				if(typeof is_vc_4_4 === 'undefined')
+					is_vc_4_4 = false;
 
 				if(typeof theme_support === 'undefined')
 					theme_support = 'disable';
@@ -422,8 +442,8 @@
 					stop ='';
 				}
 
-				vc = parseFloat(vc);
-				if(vc < 4.4 || theme_support == 'enable')
+				//vc = parseFloat(vc);
+				if(is_vc_4_4 == true || theme_support == 'enable')
 				{
 					if(selector.prev().is('p') || selector.prev().is('style'))
 						var parent = selector.prev().prev();
@@ -726,12 +746,16 @@
 				var vc_row_class = selector.data('custom-vc-row');
 				var vc = selector.data('vc');
 				var theme_support = selector.data('theme-support');
+				var is_vc_4_4 = selector.data('is_old_vc');
 
 				if(typeof vc_row_class === 'undefined' || vc_row_class === '')
 					vc_row_class = 'wpb_row';
 
 				if(typeof vc === 'undefined')
 					vc = 0;
+
+				if(typeof is_vc_4_4 === 'undefined')
+					is_vc_4_4 = false;
 
 				if(typeof theme_support === 'undefined')
 					theme_support = 'disable';
@@ -760,8 +784,8 @@
 					overlay_html = overlay_color_html+overlay_pattern_html+overlay_multi_color_html;
 				}
 
-				vc = parseFloat(vc);
-				if(vc < 4.4 || theme_support == 'enable')
+				//vc = parseFloat(vc);
+				if(is_vc_4_4 == true || theme_support == 'enable')
 				{
 					if(selector.prev().is('p') || selector.prev().is('style'))
 						var parent = selector.prev().prev();
@@ -919,12 +943,16 @@
 				var vc_row_class = selector.data('custom-vc-row');
 				var vc = selector.data('vc');
 				var theme_support = selector.data('theme-support');
+				var is_vc_4_4 = selector.data('is_old_vc');
 
 				if(typeof vc_row_class === 'undefined' || vc_row_class === '')
 					vc_row_class = 'wpb_row';
 
 				if(typeof vc === 'undefined')
 					vc = 0;
+
+				if(typeof is_vc_4_4 === 'undefined')
+					is_vc_4_4 = false;
 
 				if(typeof theme_support === 'undefined')
 					theme_support = 'disable';
@@ -935,8 +963,8 @@
 					multi_color_overlay_opacity = selector.data('multi-color-overlay-opacity');
 				}
 
-				vc = parseFloat(vc);
-				if(vc < 4.4 || theme_support == 'enable')
+				//vc = parseFloat(vc);
+				if(is_vc_4_4 == true || theme_support == 'enable')
 				{
 					if(selector.prev().is('p') || selector.prev().is('style'))
 						var parent = selector.prev().prev();
@@ -1097,12 +1125,16 @@
 				var vc = selector.data('vc');
 				var theme_support = selector.data('theme-support');
 				var vc_row_class = selector.data('custom-vc-row');
+				var is_vc_4_4 = selector.data('is_old_vc');
 
 				if(typeof vc_row_class === 'undefined' || vc_row_class === '')
 					vc_row_class = 'wpb_row';
 
 				if(typeof vc === 'undefined')
 					vc = 0;
+
+				if(typeof is_vc_4_4 === 'undefined')
+					is_vc_4_4 = false;
 
 				if(typeof theme_support === 'undefined')
 					theme_support = 'disable';
@@ -1113,8 +1145,10 @@
 					multi_color_overlay_opacity = selector.data('multi-color-overlay-opacity');
 				}
 
-				vc = parseFloat(vc);
-				if(vc < 4.4 || theme_support == 'enable')
+				//vc = parseFloat(vc);
+				//vc = vc.toFixed(2)
+
+				if(is_vc_4_4 == true || theme_support == 'enable')
 				{
 					if(selector.prev().is('p') || selector.prev().is('style'))
 						var parent = selector.prev().prev();

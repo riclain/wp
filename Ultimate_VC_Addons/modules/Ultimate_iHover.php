@@ -172,10 +172,13 @@
 				  }
 			  }
 
-			  $thumb_url = '';
+			  $thumb_url = $thumb_alt = '';
 			  if($thumb_img != '') {
 
 				  $img 		= apply_filters('ult_get_img_single', $thumb_img, 'url');
+				  $thumb_alt = apply_filters('ult_get_img_single', $thumb_img, 'alt');
+				  if($thumb_alt == '')
+				  	$thumb_alt = 'image';
 				  $thumb_url  = $img;
 			  }
 
@@ -289,7 +292,7 @@
 								  $itemOutput 	.= 	'<div class="ult-ih-image-block-container">';
 								  $itemOutput 	.= 	'	<div class="ult-ih-image-block" style="' .$HeightWidth. '">';
 								  $itemOutput 	.= 	'		<div class="ult-ih-wrapper" style="' .$thumbnail_border_style. '"></div>';
-								  $itemOutput	.=	'		<img class="ult-ih-image" src="' .$thumb_url. '" alt="">';
+								  $itemOutput	.=	'		<img class="ult-ih-image" src="' .$thumb_url. '" alt="'.$thumb_alt.'">';
 								  $itemOutput 	.= 	'	</div> ';
 								  $itemOutput 	.= 	'</div>';
 
@@ -307,7 +310,7 @@
 
 					  $itemOutput 	.= 	'<div class="ult-ih-image-block" style="' .$HeightWidth. '">';
 					  $itemOutput 	.= 	'	<div class="ult-ih-wrapper" style="' .$thumbnail_border_style. '"></div>';
-					  $itemOutput 	.= 	'	<img class="ult-ih-image" src="' .$thumb_url. '" alt="">';
+					  $itemOutput 	.= 	'	<img class="ult-ih-image" src="' .$thumb_url. '" alt="'.$thumb_alt.'">';
 					  $itemOutput 	.= 	'</div>';
 
 					  $itemOutput 	.= 	'<div class="ult-ih-info" >';
@@ -323,7 +326,7 @@
 
 					  $itemOutput 	.= 	'<div class="ult-ih-image-block" style="' .$HeightWidth. '">';
 					  $itemOutput 	.= 	'	<div class="ult-ih-wrapper" style="' .$thumbnail_border_style. '"></div>';
-					  $itemOutput 	.= 	'	<img class="ult-ih-image" src="' .$thumb_url. '" alt="">';
+					  $itemOutput 	.= 	'	<img class="ult-ih-image" src="' .$thumb_url. '" alt="'.$thumb_alt.'">';
 					  $itemOutput 	.= 	'</div>';
 
 					  $itemOutput 	.= 	'<div class="ult-ih-info" style="' .$info_style. '">';
