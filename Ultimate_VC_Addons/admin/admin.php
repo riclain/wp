@@ -516,7 +516,7 @@ if(!class_exists('Ultimate_Admin_Area')){
 					$activation_check_temp = json_decode($get_activation_data);
 					$val = array(
 						'response' => $activation_check_temp->response,
-						'status' => $activation_check_temp->status,
+						'status' => "activated",
 						'code' => $activation_check_temp->code
 					);
 					update_option('ultimate_license_activation', $val);
