@@ -469,16 +469,13 @@ var fixto = (function ($, window, document) {
             if(fixedPositioningContext) {
                 // Get positioning context.
                 context = this._getContext();
-                console.log(context);
                 if(context) {
                     // There is a positioning context. Top should be according to the context.
-                    console.log(context.getBoundingClientRect());
                     if (context.getBoundingClientRect().top > 0) {
                         top = top - context.getBoundingClientRect().top;
                     }else{
                         top = Math.abs(context.getBoundingClientRect().top);
                     }
-                    console.log("Context top" + top);
                 }
             }
 
@@ -563,7 +560,6 @@ var fixto = (function ($, window, document) {
 
             childStyle.position = 'fixed';
             childStyle.top = this._mindtop() + this.options.top - computedStyle.toFloat(childStyles.marginTop) + 'px';
-            console.log('childStyle.top: ' + childStyle.top );
             this._$child.addClass(this.options.className);
             this.fixed = true;
         },

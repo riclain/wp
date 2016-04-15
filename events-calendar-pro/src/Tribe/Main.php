@@ -1263,11 +1263,7 @@
 			 * @return string
 			 */
 			public function helpTabForumsLink( $content ) {
-				if ( get_option( 'pue_install_key_events_calendar_pro ' ) ) {
-					return 'http://m.tri.be/4x';
-				} else {
-					return 'http://m.tri.be/4w';
-				}
+				return 'http://m.tri.be/4x';
 			}
 
 			/**

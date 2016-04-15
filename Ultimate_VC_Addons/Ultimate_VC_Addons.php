@@ -4,7 +4,7 @@ Plugin Name: Ultimate Addons for Visual Composer
 Plugin URI: https://brainstormforce.com/demos/ultimate/
 Author: Brainstorm Force
 Author URI: https://www.brainstormforce.com
-Version: 3.16.0.1
+Version: 3.16.1
 Description: Includes Visual Composer premium addon elements like Icon, Info Box, Interactive Banner, Flip Box, Info List & Counter. Best of all - provides A Font Icon Manager allowing users to upload / delete custom icon fonts.
 Text Domain: ultimate_vc
 */
@@ -12,7 +12,7 @@ if(!defined('__ULTIMATE_ROOT__')){
 	define('__ULTIMATE_ROOT__', dirname(__FILE__));
 }
 if(!defined('ULTIMATE_VERSION')){
-	define('ULTIMATE_VERSION', '3.16.0.1');
+	define('ULTIMATE_VERSION', '3.16.1');
 }
 
 register_activation_hook( __FILE__, 'uvc_plugin_activate');
@@ -353,7 +353,7 @@ if(!class_exists('Ultimate_VC_Addons'))
 			$ultimate_smooth_scroll_compatible = get_option('ultimate_smooth_scroll_compatible');
 
 			// register js
-			wp_register_script('ultimate-script',plugins_url('assets/min-js/ultimate.min.js',__FILE__),array('jquery'), ULTIMATE_VERSION, false);
+			wp_register_script('ultimate-script',plugins_url('assets/min-js/ultimate.min.js',__FILE__),array('jquery', 'jquery-ui-core' ), ULTIMATE_VERSION, false);
 			wp_register_script('ultimate-appear',plugins_url($js_path.'jquery-appear'.$ext.'.js',__FILE__),array('jquery'), ULTIMATE_VERSION);
 			wp_register_script('ultimate-custom',plugins_url($js_path.'custom'.$ext.'.js',__FILE__),array('jquery'), ULTIMATE_VERSION);
 			wp_register_script('ultimate-vc-params',plugins_url($js_path.'ultimate-params'.$ext.'.js',__FILE__),array('jquery'), ULTIMATE_VERSION);
@@ -482,6 +482,7 @@ if(!class_exists('Ultimate_VC_Addons'))
 						wp_enqueue_script('jquery-ui-widget');
 						wp_enqueue_script('jquery-ui-slider');
 						wp_enqueue_script('ult_range_tick');
+						wp_enqueue_script('ult_ui_touch_punch');
 					}
 
 					wp_enqueue_script('ultimate-script');

@@ -50,7 +50,7 @@
 				{
 					translate = 0;
 				}
-				var find_class = '.upb_row_bg,.upb_video-wrapper,.ult-vc-seperator';
+				var find_class = '.upb_row_bg,.upb_video-wrapper,.ult-vc-seperator,.ult-easy-separator-wrapper';
 				$(element).find('.vc-row-translate-wrapper').children().each(function(index, child) {
 					if(!jQuery(child).is(find_class))
 					{

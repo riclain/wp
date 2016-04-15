@@ -215,33 +215,37 @@ if(!class_exists('Ult_Image_Single'))
     }
   }
 
-  function ult_get_url($img) {
-    if( isset($img) && !empty($img) ) {
-      return $img;
+  if(!function_exists('ult_get_url')) {
+    function ult_get_url($img) {
+      if( isset($img) && !empty($img) ) {
+        return $img;
+      }
     }
   }
 
   //  USE THIS CODE TO SUPPORT CUSTOM SIZE OPTION
-  function getImageSquereSize( $img_id, $img_size ) {
-    if ( preg_match_all( '/(\d+)x(\d+)/', $img_size, $sizes ) ) {
-      $exact_size = array(
-        'width' => isset( $sizes[1][0] ) ? $sizes[1][0] : '0',
-        'height' => isset( $sizes[2][0] ) ? $sizes[2][0] : '0',
-      );
-    } else {
-      $image_downsize = image_downsize( $img_id, $img_size );
-      $exact_size = array(
-        'width' => $image_downsize[1],
-        'height' => $image_downsize[2],
-      );
-    }
-    if ( isset( $exact_size['width'] ) && (int) $exact_size['width'] !== (int) $exact_size['height'] ) {
-      $img_size = (int) $exact_size['width'] > (int) $exact_size['height']
-        ? $exact_size['height'] . 'x' . $exact_size['height']
-        : $exact_size['width'] . 'x' . $exact_size['width'];
-    }
+  if(!function_exists('getImageSquereSize')) {
+    function getImageSquereSize( $img_id, $img_size ) {
+      if ( preg_match_all( '/(\d+)x(\d+)/', $img_size, $sizes ) ) {
+        $exact_size = array(
+          'width' => isset( $sizes[1][0] ) ? $sizes[1][0] : '0',
+          'height' => isset( $sizes[2][0] ) ? $sizes[2][0] : '0',
+        );
+      } else {
+        $image_downsize = image_downsize( $img_id, $img_size );
+        $exact_size = array(
+          'width' => $image_downsize[1],
+          'height' => $image_downsize[2],
+        );
+      }
+      if ( isset( $exact_size['width'] ) && (int) $exact_size['width'] !== (int) $exact_size['height'] ) {
+        $img_size = (int) $exact_size['width'] > (int) $exact_size['height']
+          ? $exact_size['height'] . 'x' . $exact_size['height']
+          : $exact_size['width'] . 'x' . $exact_size['width'];
+      }
 
-    return $img_size;
+      return $img_size;
+    }
   }
 }
 

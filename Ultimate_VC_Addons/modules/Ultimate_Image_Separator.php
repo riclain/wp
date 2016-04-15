@@ -231,7 +231,7 @@ if(!class_exists('Ultimate_Image_Separator'))
 					$output .= '<div class="'.$animation_el_class.'" style="'.$animation_style.'"  '.$animation_data.' '.$opacity_start_effect_data.'>';
 						$output .= '<img class="ult-easy-separator-img" alt="'.$alt.'" src="'.$img.'" />';
 						if($url != '') {
-							$output .= '<a href="'.$url.'" target="'.$target.'"></a>';
+							$output .= '<a href="'.$url.'" '.$target.'></a>';
 						}
 					$output .= '</div>';
 				$output .= '</div>';

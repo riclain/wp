@@ -154,15 +154,17 @@
 			});
 
 			// var url = url.split('|');
-			if( url.indexOf('url:') != -1 ) {
-				url = url.split("url:").pop();
-			}
-			if( url.indexOf('url^') != -1 ) {
-				url = url.split("url^").pop();
+			if(typeof url != 'undefined' ) {
+				if( url.indexOf('url:') != -1 ) {
+					url = url.split("url:").pop();
+				}
+				if( url.indexOf('url^') != -1 ) {
+					url = url.split("url^").pop();
+				}
 			}
 
 			//	Saved Image - ID
-			if( id != 'undefined' && id != 'null' ) {
+			if( typeof id != 'undefined' && id != 'null' ) {
 
 				if( !url ) {
 					// set process
@@ -179,7 +181,7 @@
 			}
 
 			//	Saved Image - SRC
-			if( url != 'undefined' && url != 'null' ) {
+			if( typeof url != 'undefined' && url != 'null' ) {
 				$t.find( '.ult_selected_image_list .inner' ).children( 'img' ).attr('src', url );
 				$t.find( '.ult_selected_image' ).show();
 			} else {

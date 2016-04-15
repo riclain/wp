@@ -14,7 +14,7 @@
 */
 .ult-sticky {
     /*overflow: hidden;*/
-    z-index: 10000;
+    z-index: 99999;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
 }
@@ -22,19 +22,19 @@
 .ult-sticky.ult-stick {
     position: fixed;
     /*overflow:visible;*/
-    z-index: 10000;
+    z-index: 99999;
 }
 
 
 .ult-sticky.ult-stick-full-width {
     position: fixed;
     left: 0;
-    z-index: 10000;
+    z-index: 99999;
     
 }
 
 .ult-sticky-anchor.ult_stick_to_row{
-    z-index: 10000;
+    z-index: 99990;
 }
 /*.ult-sticky-section > .vc_row {
     margin-left: 0px;

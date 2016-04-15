@@ -12,7 +12,7 @@ if(!class_exists("Ultimate_Google_Maps")){
 		}
 		function ultimate_google_map_script()
 		{
-			wp_register_script("googleapis","https://maps.googleapis.com/maps/api/js?v=3.21&sensor=false",null,null,false);
+			wp_register_script("googleapis","https://maps.googleapis.com/maps/api/js?v=3.23",null,null,false);
 		}
 		function google_maps_init(){
 			if ( function_exists('vc_map'))

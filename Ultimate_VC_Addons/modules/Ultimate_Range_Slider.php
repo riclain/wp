@@ -804,14 +804,14 @@ if( !class_exists( "Ultimate_Range_Slider" ) ){
 				$ext = '.min';
 			}
 			wp_register_style('ult_range_slider_css',plugins_url($css_path.'range-slider'.$ext.'.css',__FILE__), array(), ULTIMATE_VERSION, false);
-			//wp_register_style('ult_range_slider_jqueryui_css',"https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css", array(), ULTIMATE_VERSION, false);
-
-			wp_register_script('ult_range_slider_js', plugins_url($js_path.'range-slider'.$ext.'.js',__FILE__) , array('jquery'), ULTIMATE_VERSION, true);
-			wp_register_script('ult_ui_touch_punch', plugins_url($js_path.'range-slider-touch-punch'.$ext.'.js',__FILE__) , array('jquery'), ULTIMATE_VERSION, true);
+			
+			wp_register_script('ult_range_slider_js', plugins_url($js_path.'range-slider'.$ext.'.js',__FILE__) , array('jquery', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-slider'), ULTIMATE_VERSION, true);
+			
+			wp_register_script('ult_ui_touch_punch', plugins_url($js_path.'range-slider-touch-punch'.$ext.'.js',__FILE__) , array('jquery, jquery-ui-widget, jquery-ui-mouse'), ULTIMATE_VERSION, true);
 
 			//jquery.ui.labeledslider
-			wp_register_script( 'ult_range_tick', plugins_url($js_path.'jquery-ui-labeledslider'.$ext.'.js',__FILE__) , array('jquery', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-slider' ), ULTIMATE_VERSION, true);
-			//wp_register_style( 'jscss', plugins_url($css_path.'jquery.ui.labeledslider'.$ext.'.css',__FILE__), array(), ULTIMATE_VERSION, false);
+			wp_register_script( 'ult_range_tick', plugins_url($js_path.'jquery-ui-labeledslider'.$ext.'.js',__FILE__) , array('jquery', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-slider' ), ULTIMATE_VERSION, false);
+			
 
 			
 		}

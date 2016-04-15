@@ -152,6 +152,7 @@
 .ult-ib-effect-style1:hover .ult-new-ib-content,
 .ult-ib-effect-style1:hover .ult-new-ib-title,.ult-ib-effect-style1:hover .ult-new-ib-title,
 .ult-ib-effect-style1:hover img {
+    -moz-transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0)
     -webkit-transition-delay: .05s;

@@ -326,7 +326,7 @@ jQuery(document).ready(function(a) {
 
 
             }
-            //console.log("here");
+            
             jQuery('html, body').animate({
               scrollTop: a(this).offset().top-100
             }, 1200);

@@ -66,7 +66,7 @@ if(!class_exists('Ultimate_FancyText')){
 								"value" => array(
 									__("Type", "ultimate_vc") => "typewriter",
 									__("Slide Up", "ultimate_vc") => "ticker",
-									__("Slide Down", "ultimate_vc") => "ticker-down"
+									//__("Slide Down", "ultimate_vc") => "ticker-down"
 								),
 							),
 							array(

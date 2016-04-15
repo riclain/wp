@@ -59,7 +59,8 @@ module.exports = function(grunt) {
 							'!assets/js/smoothscroll-easing.js',
 							'!assets/js/smoothscroll-simplr-smoothscroll.js',
 							'!assets/js/jquery.js',
-							'!assets/js/jquery-ui-labeledslider.js'
+							'!assets/js/jquery-ui-labeledslider.js',
+							'!assets/js/range-slider-touch-punch.js'
 						],
 					dest: 'assets/min-js/ultimate.min.js'
 				},

@@ -180,6 +180,7 @@ function inside_row_(){
       if ( _windowsize < 768 && mobile == 'no' ){
         ult_sticky.removeClass("ult-stick");
         ult_space.css('height', '')
+        $this.removeClass('ult-permanent-flag');
         return;
       }
 

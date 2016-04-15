@@ -1,6 +1,6 @@
 (function ($) {
 	/* js view for singleTab Element*/
-  
+
 //console && console.log('UltimateSubTabView.js is loaded');
 // Come from vc_map -> 'js_view' => 'UltimateSubTabView'
 if(typeof vc === 'undefined' || typeof window.VcColumnView==='undefined')
@@ -15,7 +15,7 @@ window.UltimateSubTabView = window.VcColumnView.extend({
           'click > .vc_controls .vc_control-btn-clone':'clone',
           'click > .wpb_element_wrapper > .vc_empty-container':'addToEmpty'
         },
-	
+
 	// Render method called after element is added( cloned ), and on first initialisation
     render:function () {
             var params = this.model.get('params');
@@ -44,7 +44,7 @@ window.UltimateSubTabView = window.VcColumnView.extend({
             window.UltimateSubTabView.__super__.changeShortcodeParams.call(this, model);
              //var params = model.get('params');
             if (_.isObject(params) && _.isString(params.title) && _.isString(params.tab_id)) {
-                $('.ui-tabs-nav [href=#tab-' + params.tab_id + ']').text(params.title);
+                $('.ui-tabs-nav [href="#tab-' + params.tab_id + '"]').text(params.title);
             }
             //console && console.log('UltimateSubTabView changeShortcodeParams loading');
         },
@@ -84,7 +84,7 @@ window.UltimateSubTabView = window.VcColumnView.extend({
             //console && console.log('UltimateSubTabView.cloneModel loading');
             return model_clone;
         }
-  
+
 });
 
 // Come from vc_map -> 'js_view' => 'UltimateSubTabView'

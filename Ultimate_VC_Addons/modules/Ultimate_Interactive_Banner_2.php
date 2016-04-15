@@ -499,6 +499,7 @@ if(!class_exists('Ultimate_Interactive_Banner'))
 					$img_min_height = ' data-min-height="'.$banner_min.'" ';
 					//$img_max_height = ' data-max-width="none" ';
 					$min_height_class = 'ult-ib2-min-height';
+					$banner_style_inline .= ' opacity:0; ';
 				}
 			}
 
@@ -552,6 +553,13 @@ if(!class_exists('Ultimate_Interactive_Banner'))
 				$output .= $text;
 				$output .= '</pre>';
 			}
+			$output .= '<script type="text/javascript">
+			(function($){
+				$(document).ready(function(){
+					$(".ult-new-ib").css("opacity","1");
+				});
+			})(jQuery);
+			</script>';
 			return $output;
 		}
 	}
