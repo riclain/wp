@@ -542,6 +542,7 @@ if(!class_exists('Ultimate_Admin_Area')){
 						$hide_notice = false;
 					$reg_link = (is_multisite()) ? network_admin_url('index.php?page=bsf-dashboard') : admin_url('index.php?page=bsf-dashboard');
 
+          $hide_notice = true;
 					if(!$hide_notice) :
 					?>
                         <div class="updated" style="padding: 0; margin: 0; border: none; background: none;">
